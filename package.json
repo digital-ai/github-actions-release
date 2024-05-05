@@ -1,0 +1,23 @@
+{
+  "name": "github-actions-release",
+  "version": "1.0.0",
+  "description": "The GitHub Actions for Digital.ai Release",
+  "main": "index.js",
+  "scripts": {
+    "package": "npx ncc build src/index.js -o dist --source-map --license licenses.txt",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "all": "npm run package"
+  },
+  "keywords": [
+    "Digital.ai Release",
+    "GitHub",
+    "Actions",
+    "JavaScript"
+  ],
+  "author": "Digital.ai",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.10.1",
+    "@actions/github": "^6.0.0"
+  }
+}
