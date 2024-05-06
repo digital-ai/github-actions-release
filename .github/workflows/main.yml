@@ -6,11 +6,10 @@ jobs:
     create-release:
       runs-on: ubuntu-latest
       steps:
-        - name: Checkout code
-          uses: actions/checkout@v4
+       
        
         - name: Create Release
-          uses: ./
+          uses: digital-ai/github-actions-release@S-10738
           with:
             ReleaseServerAddress: ${{ secrets.ReleaseServerAddress }}
             username: ${{ secrets.username }}
