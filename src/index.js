@@ -32,13 +32,12 @@ async function run() {
     // Construct request body
     const requestBody = {
       releaseTitle: releaseTitle,
-      folderId: templateId,
       variables: variables
     };
 
     // Make API request
     const response = await axios.post(
-      `${releaseServerAddress}/api/v1/templates/${templateId}/start`,
+      `${releaseServerAddress}/api/v1/templates/Applications/${templateId}/start`,
       requestBody,
       {
         auth: {
