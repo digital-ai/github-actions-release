@@ -1,13 +1,32 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: Create and invoke release in Digital.ai Release
+
+description: A GitHub Action to create a new release and invoke from a template.
+
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  ReleaseServerAddress:
+    description: 'The address of the release server.'
     required: true
-    default: 'World'
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  username:
+    description: 'Username for authentication.'
+    required: true
+  password:
+    description: 'Password for authentication.'
+    required: true
+  templateId:
+    description: 'The ID of the template.'
+    required: true
+  releaseTitle:
+    description: 'Title of the release.'
+    required: false
+  variables:
+    description: 'JSON string representing the variables object.'
+    required: false
+
+
 runs:
   using: 'node20'
   main: 'dist/index.js'
+
+author:
+  name: 'Digital.ai'
+  email: 'your@email.com'
