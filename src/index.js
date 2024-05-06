@@ -4,14 +4,27 @@ const axios = require('axios');
 async function run() {
   try {
     // Get inputs
-    const serverUrl = core.getInput('serverUrl');
+    let serverUrl = core.getInput('serverUrl');
     const username = core.getInput('username');
     const password = core.getInput('password');
     const token = core.getInput('token');
-    const templateId = core.getInput('templateId');
     const startRelease = core.getInput('startRelease');
+    let templateId = core.getInput('templateId');
     let releaseTitle = core.getInput('releaseTitle');
     let variables = core.getInput('variables');
+    
+    // Remove trailing '/' from serverUrl
+    if (serverUrl.endsWith('/')) {
+      serverUrl = serverUrl.slice(0, -1);
+    }
+
+    // Remove leading and trailing '/' from templateId
+    if (templateId.startsWith('/')) {
+      templateId = templateId.slice(1);
+    }
+    if (templateId.endsWith('/')) {
+      templateId = templateId.slice(0, -1);
+    }
     
     // Check for empty required inputs
     if (!serverUrl || (!username && !token) || (!password && !token) || !templateId) {
@@ -42,8 +55,8 @@ async function run() {
     if (startRelease == 'true')
         url = `${serverUrl}/api/v1/templates/Applications/${templateId}/start`
     
-    console.log(url)
-
+    console.log('Request URL:', url);
+    
     // Construct headers
     const headers = {
       'Content-Type': 'application/json'
