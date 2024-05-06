@@ -13,14 +13,14 @@ async function run() {
     let variables = core.getInput('variables');
     
     // Check for empty required inputs
-    if (!serverUrl || !username || !password) {
-      throw new Error('serverUrl, username, and password are required.');
+    if (!serverUrl || !username || !password || !templateId) {
+      throw new Error('serverUrl, username, password and templateId are required.');
     }
 
     // Generate release title if empty
     if (!releaseTitle) {
       const now = new Date();
-      releaseTitle = `Release ${now.toISOString()}`;
+      releaseTitle = `GitHub Action Release ${now.toISOString()}`;
     }
 
     // Parse variables if provided
