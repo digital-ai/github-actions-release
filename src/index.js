@@ -36,7 +36,7 @@ async function run() {
     };
 
     let url = `${releaseServerAddress}/api/v1/templates/Applications/${templateId}/start`
-    print(url)
+    console.log(url)
 
     // Make API request
     const response = await axios.post(
