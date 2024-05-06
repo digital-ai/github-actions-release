@@ -1,0 +1,24 @@
+name: GitHub Actions Test
+
+on: [workflow_dispatch]
+
+jobs:
+    create-release:
+      runs-on: ubuntu-latest
+      steps:
+       
+        - name: Checkout
+          uses: actions/checkout@v4
+
+        - name: Create & Start Release
+          id: release
+          uses: ./
+          with:
+            serverUrl: ${{ secrets.SERVERURL }}
+            username: ${{ secrets.USERNAME }}
+            password: ${{ secrets.PASSWORD }}
+            templateId: ${{ secrets.TEMPLATEID }}
+
+        - name: Get Release Data
+          id: output
+          run: echo ${{ steps.release.outputs.response }}

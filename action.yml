@@ -1,13 +1,42 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: Create and start release on Digital.ai Release
+
+description: |
+  This GitHub Action enables the creation of a new release and start it on the Digital.ai Release. It facilitates seamless integration between your GitHub repository and Digital.ai Release, automating release management processes.
+
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  serverUrl:
+    description: 'The address of the Digital.ai Release server.'
     required: true
-    default: 'World'
+  username:
+    description: 'Username for authentication to the Digital.ai Release server. Required if `token` is not provided.'
+    required: false
+  password:
+    description: 'Password for authentication to the Digital.ai Release server. Required if `token` is not provided.'
+    required: false
+  token:
+    description: 'Personal access token for authentication to the Digital.ai Release server. If provided, `username` and `password` are not required.'
+    required: false
+  templateId:
+    description: 'The full template identifier in Digital.ai Release.'
+    required: true
+  releaseTitle:
+    description: 'Optional. Title of the release. If not provided, a default title will be assigned.'
+    required: false
+  variables:
+    description: 'Optional. JSON string representing the variables object to be passed to the release template.'
+    required: false
+  startRelease:
+    description: 'Optional. Boolean value indicating whether to start the release. Default is true.'
+    required: false
+    default: true
+
 outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  response:
+    description: 'The response containing the data of the newly created release.'
+
 runs:
   using: 'node20'
   main: 'dist/index.js'
+
+author:
+  name: 'Digital.ai'
