@@ -19,4 +19,4 @@ jobs:
             variables: '{"var1": "Two"}' 
             releaseTitle: 'Action'
         - name: Get Release Data
-          run: echo "Release data: ${{ steps.release.outputs.response }}"
+          run: echo "${{ steps.release.outputs.response }}"

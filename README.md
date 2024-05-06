@@ -10,7 +10,7 @@ This GitHub Action enables the creation of a new release and start it on the Dig
 | `username`   | Username for authentication to the Digital.ai Release server. Required if `token` is not provided.                                  | No       | -       |
 | `password`   | Password for authentication to the Digital.ai Release server. Required if `token` is not provided.                                  | No       | -       |
 | `token`      | Personal access token for authentication to the Digital.ai Release server. If provided, `username` and `password` are not required. | No       | -       |
-| `templateId` | The full template identifier in Digital.ai Release. for example, Folder3f5c/Releasec4e4b                                            | Yes      | -       |
+| `templateId` | The full template identifier in Digital.ai Release. for example, `Folder3f5cf31df154440495/Releasec4e4b7bce46f4720a`                                            | Yes      | -       |
 | `releaseTitle` | Optional. Title of the release. If not provided, a default title will be assigned.                                                | No       | -       |
 | `variables`  | Optional. JSON string representing the variables object to be passed to the release template.                                       | No       | -       |
 | `startRelease` | Optional. Boolean value indicating whether to start the release. Default is true.                                                 | No       | true    |
@@ -37,7 +37,7 @@ jobs:
         id: release
         uses: digital-ai/github-actions-release@main
         with:
-          serverUrl: 'http://your-digital-ai-release-server-url'
+          serverUrl: 'http://digital-ai-release-server-url:5516'
           token: ${{ secrets.DIGITAL_AI_RELEASE_TOKEN }}
           templateId: 'your-template-identifier'
           releaseTitle: 'New Release'
@@ -45,4 +45,4 @@ jobs:
           startRelease: true
 
        - name: Get Release Data
-         run: echo "Release data: ${{ steps.release.outputs.response }}"
+         run: echo "${{ steps.release.outputs.response }}"
