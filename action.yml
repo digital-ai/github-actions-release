@@ -3,7 +3,7 @@ name: Create and invoke release in Digital.ai Release
 description: A GitHub Action to create a new release and invoke from a template.
 
 inputs:
-  ReleaseServerAddress:
+  serverUrl:
     description: 'The address of the release server.'
     required: true
   username:
@@ -13,7 +13,7 @@ inputs:
     description: 'Password for authentication.'
     required: true
   templateId:
-    description: 'The ID of the template.'
+    description: 'The path of the template.'
     required: true
   releaseTitle:
     description: 'Title of the release.'
@@ -21,6 +21,11 @@ inputs:
   variables:
     description: 'JSON string representing the variables object.'
     required: false
+  startRelease:
+    description: 'Boolean value indicating whether to start the release. Default is true.'
+    required: false
+    default: true
+
 
 
 runs:

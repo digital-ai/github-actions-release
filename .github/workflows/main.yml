@@ -12,8 +12,9 @@ jobs:
         - name: Create Release
           uses: ./
           with:
-            ReleaseServerAddress: ${{ secrets.ReleaseServerAddress }}
+            serverUrl: 'http://65.2.30.53:5516'
             username: ${{ secrets.username }}
             password: ${{ secrets.password }}
             templateId: ${{ secrets.templateId }}
+            variables: '{"var1": "Two"}' 
             

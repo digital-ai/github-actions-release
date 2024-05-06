@@ -4,16 +4,17 @@ const axios = require('axios');
 async function run() {
   try {
     // Get inputs
-    const releaseServerAddress = core.getInput('ReleaseServerAddress');
+    const serverUrl = core.getInput('serverUrl');
     const username = core.getInput('username');
     const password = core.getInput('password');
     const templateId = core.getInput('templateId');
+    const startRelease = core.getInput('startRelease');
     let releaseTitle = core.getInput('releaseTitle');
     let variables = core.getInput('variables');
     
     // Check for empty required inputs
-    if (!releaseServerAddress || !username || !password) {
-      throw new Error('ReleaseServerAddress, username, and password are required.');
+    if (!serverUrl || !username || !password) {
+      throw new Error('serverUrl, username, and password are required.');
     }
 
     // Generate release title if empty
@@ -35,7 +36,11 @@ async function run() {
       variables: variables
     };
 
-    let url = `${releaseServerAddress}/api/v1/templates/Applications/${templateId}/start`
+    let url = `${serverUrl}/api/v1/templates/Applications/${templateId}/create`
+    
+    if (startRelease)
+        url = `${serverUrl}/api/v1/templates/Applications/${templateId}/start`
+    
     console.log(url)
 
     // Make API request
