@@ -33551,7 +33551,7 @@ async function run() {
 
     let url = `${serverUrl}/api/v1/templates/Applications/${templateId}/create`
     
-    if (startRelease)
+    if (startRelease == 'true')
         url = `${serverUrl}/api/v1/templates/Applications/${templateId}/start`
     
     console.log(url)
