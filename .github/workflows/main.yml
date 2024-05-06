@@ -21,4 +21,4 @@ jobs:
 
         - name: Get Release Data
           id: output
-          run: echo "${{ steps.release.outputs.response }}"
+          run: echo ${{ steps.release.outputs.response }}
