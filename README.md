@@ -45,4 +45,4 @@ jobs:
           startRelease: true
 
        - name: Get Release Data
-         run: echo "${{ steps.release.outputs.response }}"
+         run: echo ${{ steps.release.outputs.response }}
