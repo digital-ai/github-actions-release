@@ -56,7 +56,7 @@ async function run() {
         url = `${serverUrl}/api/v1/templates/Applications/${templateId}/start`
     
     console.log('Request URL:', url);
-    
+
     // Construct headers
     const headers = {
       'Content-Type': 'application/json'
@@ -87,5 +87,9 @@ async function run() {
     core.setFailed(error.message);
   }
 }
+
+module.exports = {
+    run
+  }
 
 run();
