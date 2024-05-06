@@ -13,6 +13,5 @@ jobs:
           uses: ./
           with:
             serverUrl: 'http://65.2.30.53:5516'
-            token: ${{ secrets.token }}
             templateId: 'Folder3f5cf31df154440495d8af9425aa9cdb/Releasec4e4b7bce46f4720a43ead5da8543086'
             variables: '{"var1": "Two"}' 
