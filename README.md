@@ -21,7 +21,7 @@ jobs:
           serverUrl: 'http://digital-ai-release-server-url:5516'
           token: ${{ secrets.DIGITAL_AI_RELEASE_TOKEN }}
           templateId: 'your-template-identifier'
-          releaseTitle: 'New Release from GitHub Action'
+          releaseTitle: 'New Release from GitHub Actions'
           variables: '{"var1": "value1", "var2": "value2"}'
           startRelease: true
 
