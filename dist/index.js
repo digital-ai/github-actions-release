@@ -33545,18 +33545,24 @@ async function run() {
     // Construct request body
     const requestBody = {
       releaseTitle: releaseTitle,
-      folderId: templateId,
       variables: variables
     };
 
+    let url = `${releaseServerAddress}/api/v1/templates/Applications/${templateId}/start`
+    print(url)
+
     // Make API request
     const response = await axios.post(
-      `${releaseServerAddress}/api/v1/templates/${templateId}/start`,
+      url,
       requestBody,
       {
         auth: {
           username: username,
           password: password
+        }
+        ,
+        headers: {
+          'Content-Type': 'application/json'
         }
       }
     );
