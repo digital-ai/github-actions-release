@@ -33521,18 +33521,19 @@ async function run() {
     const username = core.getInput('username');
     const password = core.getInput('password');
     const templateId = core.getInput('templateId');
+    const startRelease = core.getInput('startRelease');
     let releaseTitle = core.getInput('releaseTitle');
     let variables = core.getInput('variables');
     
     // Check for empty required inputs
-    if (!serverUrl || !username || !password) {
-      throw new Error('serverUrl, username, and password are required.');
+    if (!serverUrl || !username || !password || !templateId) {
+      throw new Error('serverUrl, username, password and templateId are required.');
     }
 
     // Generate release title if empty
     if (!releaseTitle) {
       const now = new Date();
-      releaseTitle = `Release ${now.toISOString()}`;
+      releaseTitle = `GitHub Action Release ${now.toISOString()}`;
     }
 
     // Parse variables if provided
@@ -33548,7 +33549,11 @@ async function run() {
       variables: variables
     };
 
-    let url = `${serverUrl}/api/v1/templates/Applications/${templateId}/start`
+    let url = `${serverUrl}/api/v1/templates/Applications/${templateId}/create`
+    
+    if (startRelease)
+        url = `${serverUrl}/api/v1/templates/Applications/${templateId}/start`
+    
     console.log(url)
 
     // Make API request
