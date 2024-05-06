@@ -1,32 +1,38 @@
-name: Create and invoke release in Digital.ai Release
+name: Create and Invoke Release in Digital.ai Release
 
-description: A GitHub Action to create a new release and invoke from a template.
+description: |
+  This GitHub Action enables the creation of a new release and invocation from the Digital.ai Release template. It facilitates seamless integration between your GitHub repository and Digital.ai Release, automating release management processes.
 
 inputs:
   serverUrl:
-    description: 'The address of the release server.'
+    description: 'The address of the Digital.ai Release server.'
     required: true
   username:
-    description: 'Username for authentication.'
-    required: true
+    description: 'Username for authentication to the Digital.ai Release server. Required if `token` is not provided.'
+    required: false
   password:
-    description: 'Password for authentication.'
-    required: true
+    description: 'Password for authentication to the Digital.ai Release server. Required if `token` is not provided.'
+    required: false
+  token:
+    description: 'Personal access token for authentication to the Digital.ai Release server. If provided, `username` and `password` are not required.'
+    required: false
   templateId:
-    description: 'The path of the template.'
+    description: 'The full template identifier in Digital.ai Release.'
     required: true
   releaseTitle:
-    description: 'Title of the release.'
+    description: 'Optional. Title of the release. If not provided, a default title will be assigned.'
     required: false
   variables:
-    description: 'JSON string representing the variables object.'
+    description: 'Optional. JSON string representing the variables object to be passed to the release template.'
     required: false
   startRelease:
-    description: 'Boolean value indicating whether to start the release. Default is true.'
+    description: 'Optional. Boolean value indicating whether to start the release. Default is true.'
     required: false
     default: true
 
-
+outputs:
+  response:
+    description: 'The response containing the data of the newly created release.'
 
 runs:
   using: 'node20'
@@ -34,4 +40,3 @@ runs:
 
 author:
   name: 'Digital.ai'
-  email: 'your@email.com'

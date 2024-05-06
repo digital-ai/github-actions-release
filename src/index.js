@@ -7,20 +7,21 @@ async function run() {
     const serverUrl = core.getInput('serverUrl');
     const username = core.getInput('username');
     const password = core.getInput('password');
+    const token = core.getInput('token');
     const templateId = core.getInput('templateId');
     const startRelease = core.getInput('startRelease');
     let releaseTitle = core.getInput('releaseTitle');
     let variables = core.getInput('variables');
     
     // Check for empty required inputs
-    if (!serverUrl || !username || !password || !templateId) {
-      throw new Error('serverUrl, username, password and templateId are required.');
+    if (!serverUrl || (!username && !token) || (!password && !token) || !templateId) {
+      throw new Error('serverUrl, username/password or token, and templateId are required.');
     }
 
     // Generate release title if empty
     if (!releaseTitle) {
       const now = new Date();
-      releaseTitle = `GitHub Action Release ${now.toISOString()}`;
+      releaseTitle = `GitHub Actions Release ${now.toISOString()}`;
     }
 
     // Parse variables if provided
@@ -43,19 +44,25 @@ async function run() {
     
     console.log(url)
 
+    // Construct headers
+    const headers = {
+      'Content-Type': 'application/json'
+    };
+
+    // Add token to headers if provided
+    if (token) {
+      headers['x-release-personal-token'] = token;
+    } else {
+      // Add basic authentication if username and password are provided
+      headers['Authorization'] = `Basic ${Buffer.from(`${username}:${password}`).toString('base64')}`;
+    }
+
     // Make API request
     const response = await axios.post(
       url,
       requestBody,
       {
-        auth: {
-          username: username,
-          password: password
-        }
-        ,
-        headers: {
-          'Content-Type': 'application/json'
-        }
+        headers: headers
       }
     );
 
