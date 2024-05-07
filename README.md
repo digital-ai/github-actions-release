@@ -11,24 +11,24 @@ on: [push]
 
 jobs:
   create-and-start-release:
-    runs-on: ubuntu-latest
-    steps:
-    
-      - name: Create and Start Release
-        id: release
-        uses: digital-ai/github-actions-release@main
-        with:
-          serverUrl: 'http://digital-ai-release-server-url:5516'
-          token: ${{ secrets.DIGITAL_AI_RELEASE_TOKEN }}
-          templateId: 'Folder3f5cf31df154440495/Releasec4e4b7bce46f4720a'
-          releaseTitle: 'New Release from GitHub Actions'
-          variables: '{"var1": "value1", "var2": "value2"}'
-          startRelease: true
+      runs-on: ubuntu-latest
+      steps:
 
-       - name: Get Release Data
-         run: echo ${{ steps.release.outputs.response }}
-         
-```
+        - name: Create & Start Release
+          id: release
+          uses: digital-ai/github-actions-release@main
+          with:
+            serverUrl: 'http://digital-ai-release-server-url:5516'
+            token: ${{ secrets.DIGITAL_AI_RELEASE_TOKEN }}
+            templateId: 'Folder3f5cf31df154440495/Releasec4e4b7bce46f4720a'
+            releaseTitle: 'New Release from GitHub Actions'
+            variables: '{"var1": "value1", "var2": "value2"}'
+            startRelease: true
+
+        - name: Get Release Data
+          id: output
+          run: echo ${{ steps.release.outputs.response }}
+ ```
 
 ## Inputs
 
