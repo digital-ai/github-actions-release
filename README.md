@@ -10,7 +10,7 @@ name: Create and Start Release
 on: [push]
 
 jobs:
-  create-and-start-release:
+    create-and-start-release:
       runs-on: ubuntu-latest
       steps:
 
@@ -19,8 +19,9 @@ jobs:
           uses: digital-ai/github-actions-release@main
           with:
             serverUrl: 'http://digital-ai-release-server-url:5516'
-            token: ${{ secrets.DIGITAL_AI_RELEASE_TOKEN }}
-            templateId: 'Folder3f5cf31df154440495/Releasec4e4b7bce46f4720a'
+            username: ${{ secrets.RELEASE_USERNAME }}
+            password: ${{ secrets.RELEASE_PASSWORD }}
+            templateId: 'Folder3f5cf31df154440495d8af9425/Releasec4e4b7bce46f4720a43ead5da856'
             releaseTitle: 'New Release from GitHub Actions'
             variables: '{"var1": "value1", "var2": "value2"}'
             startRelease: true
