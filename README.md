@@ -30,6 +30,7 @@ jobs:
           id: output
           run: echo ${{ steps.release.outputs.response }}
  ```
+#### Example : [start-digital-ai-release.yml](example/start-digital-ai-release.yml)
 
 ## Inputs
 
