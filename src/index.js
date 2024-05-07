@@ -33,9 +33,13 @@ async function run() {
 
     // Generate release title if empty
     if (!releaseTitle) {
-      const now = new Date();
-      releaseTitle = `GitHub Actions Release ${now.toISOString()}`;
-    }
+        // Get the current tag or branch from GitHub Actions context
+        const gitTag = process.env.GITHUB_TAG;
+        const gitBranch = process.env.GITHUB_HEAD_REF || process.env.GITHUB_REF.replace('refs/heads/', '');
+        
+        // Assign tag if available, otherwise assign branch
+        releaseTitle = gitTag || gitBranch || `GitHub Actions Release ${new Date().toISOString()}`;
+      }
 
     // Parse variables if provided
     if (variables) {
