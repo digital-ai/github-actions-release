@@ -35,7 +35,7 @@ jobs:
         - name: Get Release Status
           run: echo ${{ steps.release.outputs.status }}
  ```
-#### Example Actions File : [start-digital-ai-release.yml](example/start-digital-ai-release.yml)
+#### Example Actions File : [start-digital-ai-release.yml](examples/start-digital-ai-release.yml)
 
 ## Inputs
 

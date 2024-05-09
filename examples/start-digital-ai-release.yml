@@ -14,11 +14,16 @@ jobs:
             serverUrl: 'http://digital-ai-release-server-url:5516'
             username: ${{ secrets.RELEASE_USERNAME }}
             password: ${{ secrets.RELEASE_PASSWORD }}
-            templateId: 'Folder3f5cf31df154440495d8af9425aa9cdb/Releasec4e4b7bce46f4720a43ead5da8543086'
+            templateId: 'Applications/Folder3f5cf31df1544/Releasec4e4b7bce46f4720a'
             releaseTitle: 'New Release from GitHub Actions'
             variables: '{"var1": "value1", "var2": "value2"}'
             startRelease: true
 
         - name: Get Release Data
-          id: output
           run: echo ${{ steps.release.outputs.response }}
+
+        - name: Get Release Id
+          run: echo ${{ steps.release.outputs.id }}
+        
+        - name: Get Release Status
+          run: echo ${{ steps.release.outputs.status }}          

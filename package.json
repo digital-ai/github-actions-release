@@ -2,6 +2,14 @@
   "name": "github-actions-release",
   "version": "1.0.0",
   "description": "The GitHub Actions for Digital.ai Release",
+  "homepage": "https://github.com/digital-ai/github-actions-release#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/digital-ai/github-actions-release.git"
+  },
+  "bugs": {
+    "url": "https://github.com/digital-ai/github-actions-release/issues"
+  },
   "scripts": {
     "package": "npx ncc build src/index.js -o dist --source-map --license licenses.txt",
     "test": "npx jest",
