@@ -21,32 +21,39 @@ jobs:
             serverUrl: 'http://digital-ai-release-server-url:5516'
             username: ${{ secrets.RELEASE_USERNAME }}
             password: ${{ secrets.RELEASE_PASSWORD }}
-            templateId: 'Folder3f5cf31df154440495d8af9425/Releasec4e4b7bce46f4720a43ead5da856'
+            templateId: 'Applications/FolderXXXXXXXXX/ReleaseXXXXXXXXX'
             releaseTitle: 'New Release from GitHub Actions'
             variables: '{"var1": "value1", "var2": "value2"}'
             startRelease: true
 
         - name: Get Release Data
-          id: output
           run: echo ${{ steps.release.outputs.response }}
+        
+        - name: Get Release Id
+          run: echo ${{ steps.release.outputs.id }}
+        
+        - name: Get Release Status
+          run: echo ${{ steps.release.outputs.status }}
  ```
-#### Example Actions File : [start-digital-ai-release.yml](example/start-digital-ai-release.yml)
+#### Example Actions File : [start-digital-ai-release.yml](examples/start-digital-ai-release.yml)
 
 ## Inputs
 
-| Name         | Description                                                                                                                         | Required | Default                          |
-|--------------|-------------------------------------------------------------------------------------------------------------------------------------|----------|----------------------------------|
-| `serverUrl`  | The address of the Digital.ai Release server.                                                                                       | Yes      | -                                |
-| `username`   | Username for authentication to the Digital.ai Release server. Required if `token` is not provided.                                  | Yes*     | -                                |
-| `password`   | Password for authentication to the Digital.ai Release server. Required if `token` is not provided.                                  | Yes*     | -                                |
-| `token`      | Personal access token for authentication to the Digital.ai Release server. If provided, `username` and `password` are not required. | Yes*     | -                                |
-| `templateId` | The full template identifier in Digital.ai Release. for example, `Folder3f5cf31df154440495/Releasec4e4b7bce46f4720a`                | Yes      | -                                |
-| `releaseTitle`| Optional. Title of the release. If not provided, a default title will be assigned.                                                 | No       | GITHUB_TAG /<br/>GITHUB_HEAD_REF |
-| `variables`  | Optional. JSON string representing the variables object to be passed to the release template.                                       | No       | -                                |
-| `startRelease` | Optional. Boolean value indicating whether to start the release. Default is true.                                                 | No       | true                             |
+| Name         | Description                                                                                                                                                                                                                              | Required | Default                          |
+|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|----------------------------------|
+| `serverUrl`  | The address of the Digital.ai Release server.                                                                                                                                                                                            | Yes      | -                                |
+| `username`   | Username for authentication to the Digital.ai Release server. Required if `token` is not provided.                                                                                                                                       | Yes*     | -                                |
+| `password`   | Password for authentication to the Digital.ai Release server. Required if `token` is not provided.                                                                                                                                       | Yes*     | -                                |
+| `token`      | Personal access token for authentication to the Digital.ai Release server. If provided, `username` and `password` are not required.                                                                                                      | Yes*     | -                                |
+| `templateId` | The full template identifier in Digital.ai Release is as follows: For example, `Applications/Folder3f5cf31df/Releasec4e4b7bce4` <br/>For more details, [click here](https://apidocs.digital.ai/xl-release/22.3.x/rest-docs/#identifiers) | Yes      | -                                |
+| `releaseTitle`| Optional. Title of the release. If not provided, a default title will be assigned.                                                                                                                                                       | No       | GITHUB_TAG /<br/>GITHUB_HEAD_REF |
+| `variables`  | Optional. JSON string representing the variables object to be passed to the release template.                                                                                                                                            | No       | -                                |
+| `startRelease` | Optional. Boolean value indicating whether to start the release. Default is true.                                                                                                                                                        | No       | true                             |
 
 ## Outputs
 
-| Name         | Description                                                                               |
-|--------------|-------------------------------------------------------------------------------------------|
-| `response`   | The response containing the data of the newly created release.                            |
+| Name        | Description                                                    |
+|-------------|----------------------------------------------------------------|
+| `response`  | The response containing the data of the newly created release. |
+| `id`        | The id of the newly created release.                           |
+| `status`    | The status of the newly created release.                        |

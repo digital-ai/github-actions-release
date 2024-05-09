@@ -23,7 +23,7 @@ describe('Create and start release on Digital.ai Release', () => {
         case 'token':
           return '';
         case 'templateId':
-          return 'template123';
+          return 'Applications/template123';
         case 'releaseTitle':
           return 'New Release';
         case 'variables':
