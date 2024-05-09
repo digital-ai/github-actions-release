@@ -33,6 +33,10 @@ inputs:
 outputs:
   response:
     description: 'The response containing the data of the newly created release.'
+  id:
+    description: 'The id of the newly created release.'
+  status:
+    description: 'The status of the newly created release.' 
 
 runs:
   using: 'node20'
