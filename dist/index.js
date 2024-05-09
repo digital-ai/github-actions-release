@@ -28474,10 +28474,10 @@ async function run() {
       variables: variables
     };
 
-    let url = `${serverUrl}/api/v1/templates/Applications/${templateId}/create`
+    let url = `${serverUrl}/api/v1/templates/${templateId}/create`
     
     if (startRelease == 'true')
-        url = `${serverUrl}/api/v1/templates/Applications/${templateId}/start`
+        url = `${serverUrl}/api/v1/templates/${templateId}/start`
     
     console.log('Request URL:', url);
 
@@ -28506,6 +28506,8 @@ async function run() {
     // Log response and set output
     console.log('Response:', response.data);
     core.setOutput('response', JSON.stringify(response.data));
+    core.setOutput('id', response.data['id']);
+    core.setOutput('status', response.data['status']);
   } catch (error) {
     // Handle errors
     core.setFailed(error.message);

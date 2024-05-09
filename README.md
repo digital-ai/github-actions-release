@@ -27,8 +27,13 @@ jobs:
             startRelease: true
 
         - name: Get Release Data
-          id: output
           run: echo ${{ steps.release.outputs.response }}
+        
+        - name: Get Release Id
+          run: echo ${{ steps.release.outputs.id }}
+        
+        - name: Get Release Status
+          run: echo ${{ steps.release.outputs.status }}
  ```
 #### Example Actions File : [start-digital-ai-release.yml](example/start-digital-ai-release.yml)
 
@@ -48,6 +53,8 @@ jobs:
 
 ## Outputs
 
-| Name         | Description                                                                               |
-|--------------|-------------------------------------------------------------------------------------------|
-| `response`   | The response containing the data of the newly created release.                            |
+| Name        | Description                                                    |
+|-------------|----------------------------------------------------------------|
+| `response`  | The response containing the data of the newly created release. |
+| `id`        | The id of the newly created release.                           |
+| `status`    | The status of the newly created release.                        |
