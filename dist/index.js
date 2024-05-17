@@ -28428,42 +28428,39 @@ async function run() {
     const username = core.getInput('username');
     const password = core.getInput('password');
     const token = core.getInput('token');
-    const startRelease = core.getInput('startRelease');
+    let startRelease = core.getInput('startRelease');
     let templateId = core.getInput('templateId');
     let releaseTitle = core.getInput('releaseTitle');
     let variables = core.getInput('variables');
-    
-    // Remove trailing '/' from serverUrl
-    if (serverUrl.endsWith('/')) {
-      serverUrl = serverUrl.slice(0, -1);
+
+    // Clean serverUrl and templateId
+    serverUrl = serverUrl.replace(/\/+$/, ''); // Remove trailing slashes
+    templateId = templateId.replace(/^\/+|\/+$/g, ''); // Remove leading and trailing slashes
+
+    // Set default value for startRelease if not provided
+    if (!startRelease) {
+      startRelease = 'true';
     }
 
-    // Remove leading and trailing '/' from templateId
-    if (templateId.startsWith('/')) {
-      templateId = templateId.slice(1);
-    }
-    if (templateId.endsWith('/')) {
-      templateId = templateId.slice(0, -1);
-    }
-    
-    // Check for empty required inputs
+    // Validate required inputs
     if (!serverUrl || (!username && !token) || (!password && !token) || !templateId) {
       throw new Error('serverUrl, username/password or token, and templateId are required.');
     }
 
     // Generate release title if empty
     if (!releaseTitle) {
-        // Get the current tag or branch from GitHub Actions context
-        const gitTag = process.env.GITHUB_TAG;
-        const gitBranch = process.env.GITHUB_HEAD_REF || process.env.GITHUB_REF.replace('refs/heads/', '');
-        
-        // Assign tag if available, otherwise assign branch
-        releaseTitle = gitTag || gitBranch || `GitHub Actions Release ${new Date().toISOString()}`;
-      }
+      const gitTag = process.env.GITHUB_TAG;
+      const gitBranch = process.env.GITHUB_HEAD_REF || process.env.GITHUB_REF.replace('refs/heads/', '');
+      releaseTitle = gitTag || gitBranch || `GitHub Actions Release ${new Date().toISOString()}`;
+    }
 
     // Parse variables if provided
     if (variables) {
-      variables = JSON.parse(variables);
+      try {
+        variables = JSON.parse(variables);
+      } catch (error) {
+        throw new Error('Failed to parse variables input as JSON.');
+      }
     } else {
       variables = {};
     }
@@ -28474,11 +28471,9 @@ async function run() {
       variables: variables
     };
 
-    let url = `${serverUrl}/api/v1/templates/${templateId}/create`
-    
-    if (startRelease == 'true')
-        url = `${serverUrl}/api/v1/templates/${templateId}/start`
-    
+    // Determine URL based on startRelease input
+    let url = `${serverUrl}/api/v1/templates/${templateId}/${startRelease === 'true' ? 'start' : 'create'}`;
+
     console.log('Request URL:', url);
 
     // Construct headers
@@ -28495,19 +28490,13 @@ async function run() {
     }
 
     // Make API request
-    const response = await axios.post(
-      url,
-      requestBody,
-      {
-        headers: headers
-      }
-    );
+    const response = await axios.post(url, requestBody, { headers: headers });
 
     // Log response and set output
     console.log('Response:', response.data);
     core.setOutput('response', JSON.stringify(response.data));
-    core.setOutput('id', response.data['id']);
-    core.setOutput('status', response.data['status']);
+    core.setOutput('id', response.data.id);
+    core.setOutput('status', response.data.status);
   } catch (error) {
     // Handle errors
     core.setFailed(error.message);
@@ -28515,8 +28504,8 @@ async function run() {
 }
 
 module.exports = {
-    run
-  }
+  run
+};
 
 run();
 
