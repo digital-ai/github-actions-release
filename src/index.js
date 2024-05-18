@@ -70,7 +70,15 @@ async function run() {
     }
 
     // Make API request
-    const response = await axios.post(url, requestBody, { headers: headers });
+    let response;
+    try {
+      response = await axios.post(url, requestBody, { headers: headers });
+    } catch (error) {
+      const statusCode = error.response ? error.response.status : 'No response';
+      const errorData = error.response ? error.response.data : error.message;
+      console.error(`Error with ${url}: Status Code: ${statusCode}, Data:`, errorData);
+      throw error;
+    }
 
     // Log response and set output
     console.log('Response:', response.data);

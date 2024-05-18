@@ -24,7 +24,7 @@ jobs:
             templateId: 'Applications/FolderXXXXXXXXX/ReleaseXXXXXXXXX'
             releaseTitle: 'New Release from GitHub Actions'
             variables: '{"var1": "value1", "var2": "value2"}'
-            startRelease: true
+            startRelease: 'true'
 
         - name: Get Release Data
           run: echo ${{ steps.release.outputs.response }}
@@ -48,7 +48,7 @@ jobs:
 | `templateId` | The full template identifier in Digital.ai Release is as follows: For example, `Applications/Folder3f5cf31df/Releasec4e4b7bce4` <br/>For more details, [click here](https://apidocs.digital.ai/xl-release/22.3.x/rest-docs/#identifiers) | Yes      | -                                |
 | `releaseTitle`| Optional. Title of the release. If not provided, a default title will be assigned.                                                                                                                                                       | No       | GITHUB_TAG /<br/>GITHUB_HEAD_REF |
 | `variables`  | Optional. JSON string representing the variables object to be passed to the release template.                                                                                                                                            | No       | -                                |
-| `startRelease` | Optional. Boolean value indicating whether to start the release. Default is true.                                                                                                                                                        | No       | true                             |
+| `startRelease` | Optional. It indicating whether to start the release. Default is true.                                                                                                                                                        | No       | true                             |
 
 ## Outputs
 
