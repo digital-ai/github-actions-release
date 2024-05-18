@@ -1,4 +1,4 @@
-# Create and start release on Digital.ai Release from GitHub Actions
+# Digital.ai Release GitHub Actions
 
 This GitHub Action enables the creation of a new release and start it on the Digital.ai Release. It facilitates seamless integration between your GitHub repository and Digital.ai Release, automating release management processes.
 
