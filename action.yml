@@ -1,9 +1,9 @@
-name: Digital.ai Release Integration
-description: Github Actions for Digital.ai Release
-author: Digital.ai
+name: 'Digital.ai Release Integration'
+description: 'Github Actions for Digital.ai Release'
+author: 'Digital.ai'
 branding:
-  color: "green"
-  icon: "package"
+  color: 'green'
+  icon: 'package'
 
 inputs:
   serverUrl:
