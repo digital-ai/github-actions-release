@@ -1,7 +1,9 @@
-name: Create and start release on Digital.ai Release
-
-description: |
-  This GitHub Action enables the creation of a new release and start it on the Digital.ai Release. It facilitates seamless integration between your GitHub repository and Digital.ai Release, automating release management processes.
+name: Digital.ai Release Integration
+description: Github Actions for Digital.ai Release
+author: Digital.ai
+branding:
+  color: "green"
+  icon: "package"
 
 inputs:
   serverUrl:
@@ -28,7 +30,7 @@ inputs:
   startRelease:
     description: 'Optional. Boolean value indicating whether to start the release. Default is true.'
     required: false
-    default: true
+    default: 'true'
 
 outputs:
   response:
@@ -42,5 +44,3 @@ runs:
   using: 'node20'
   main: 'dist/index.js'
 
-author:
-  name: 'Digital.ai'
