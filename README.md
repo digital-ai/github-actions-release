@@ -16,7 +16,7 @@ jobs:
 
         - name: Create & Start Release
           id: release
-          uses: digital-ai/github-actions-release@v1.0.0-beta.1
+          uses: digital-ai/github-actions-release@v2.0.0
           with:
             serverUrl: 'http://digital-ai-release-server-url:5516'
             username: ${{ secrets.RELEASE_USERNAME }}
