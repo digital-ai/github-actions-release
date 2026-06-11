@@ -8,7 +8,7 @@ jobs:
       steps:
 
         - name: Checkout
-          uses: actions/checkout@v4
+          uses: actions/checkout@v5
 
         - name: Create & Start Release
           id: release
@@ -17,7 +17,7 @@ jobs:
             serverUrl: ${{ secrets.SERVERURL }}
             username: ${{ secrets.USERNAME }}
             password: ${{ secrets.PASSWORD }}
-            templateId: 'Folder8911f461a81647b1b29fb5009e81cf9b-Releaseeff332faee9b47ab9867040cd3f48f15'
+            templateId: 'Applications/Folder8911f461a81647b1b29fb5009e81cf9b/Releaseeff332faee9b47ab9867040cd3f48f15'
             variables: '{"var1": "Digital.ai"}'
             releaseTitle: 'New Release from GitHub Actions'
 
